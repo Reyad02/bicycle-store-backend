@@ -1,5 +1,5 @@
 import QueryBuilder from '../../builder/QueryBuilder';
-import { BicycleSearchableFields } from './bicycle.contant';
+import { BicycleSearchableFields } from './bicycle.constant';
 import Ibicycle from './bicycle.interface';
 import Bicycle from './bicycle.model';
 
