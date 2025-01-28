@@ -13,7 +13,12 @@ const createUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    console.log(err);
+    res.status(400).json({
+      message: err.message || 'Failed to create user',
+      success: false,
+      error: err,
+      stack: err?.stack
+    });
   }
 };
 
@@ -27,7 +32,7 @@ const getSingleUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    console.log(err);
+    res.send(err);
   }
 };
 
@@ -35,10 +40,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
   try {
     const { email } = req.params;
     const payload = req.body;
-    const result = await userServices.updateSingleUser(
-      email,
-      payload,
-    );
+    const result = await userServices.updateSingleUser(email, payload);
     res.json({
       message: 'User updated successfully',
       success: true,
@@ -56,7 +58,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
 
 const getUsers = async (req: Request, res: Response) => {
   try {
-    const {products} = await userServices.getUsers(req.query);
+    const { products } = await userServices.getUsers(req.query);
     res.json({
       message: 'Users retrieved successfully',
       success: true,
@@ -71,7 +73,7 @@ const getUsers = async (req: Request, res: Response) => {
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      console.log(err);
+      res.send(err);
     }
   }
 };
@@ -80,5 +82,5 @@ export const userController = {
   createUser,
   getSingleUser,
   updateSingleUser,
-  getUsers
+  getUsers,
 };

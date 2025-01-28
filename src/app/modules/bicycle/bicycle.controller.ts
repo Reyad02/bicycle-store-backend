@@ -21,7 +21,7 @@ const createBicycle = async (req: Request, res: Response) => {
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      console.log(err);
+      res.send(err);
     }
   }
 };
@@ -43,7 +43,7 @@ const getSingleBicycle = async (req: Request, res: Response) => {
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      console.log(err);
+      res.send(err);
     }
   }
 };
@@ -92,7 +92,7 @@ const deleteSingleBicycle = async (req: Request, res: Response) => {
 
 const getBicycles = async (req: Request, res: Response) => {
   try {
-    const {products} = await bicycleServices.getBicycles(req.query);
+    const { products } = await bicycleServices.getBicycles(req.query);
     res.json({
       message: 'Bicycles retrieved successfully',
       success: true,
@@ -107,7 +107,7 @@ const getBicycles = async (req: Request, res: Response) => {
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      console.log(err);
+      res.send(err);
     }
   }
 };
@@ -117,5 +117,5 @@ export const bicyclesController = {
   getSingleBicycle,
   updateSingleBicycle,
   deleteSingleBicycle,
-  getBicycles
+  getBicycles,
 };
