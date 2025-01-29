@@ -13,12 +13,21 @@ const createUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    res.status(400).json({
-      message: err.message || 'Failed to create user',
-      success: false,
-      error: err,
-      stack: err?.stack
-    });
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to create user',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 
@@ -32,7 +41,21 @@ const getSingleUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    res.send(err);
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get user',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 
@@ -46,13 +69,22 @@ const updateSingleUser = async (req: Request, res: Response) => {
       success: true,
       data: result,
     });
-  } catch (error: any) {
-    res.status(500).json({
-      message: error.name || 'Something Went Wrong, So Data Is Not Inserted',
-      success: false,
-      error,
-      stack: error.stack || 'No stack trace available',
-    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to update user',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 
@@ -66,14 +98,19 @@ const getUsers = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {
-      res.status(500).json({
+      res.status(400).json({
         message: 'Validation failed',
         success: false,
         err,
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      res.send(err);
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get users',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
     }
   }
 };

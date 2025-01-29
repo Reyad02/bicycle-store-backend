@@ -1,21 +1,32 @@
 import { Request, Response } from 'express';
 import { authServices } from './auth.service';
+import loginValidationSchema from './auth.validation';
 
 const loginUser = async (req: Request, res: Response) => {
   try {
-    const result = await authServices.loginUser(req.body);
+    const loginCredential = loginValidationSchema.parse(req.body);
+    const result = await authServices.loginUser(loginCredential);
     res.json({
       message: 'User logged in successfully',
       success: true,
       data: result,
     });
   } catch (err: any) {
-    res.status(400).json({
-      message: err.message || 'Failed to login user',
-      success: false,
-      error: err,
-      stack: err?.stack,
-    });
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to login user',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 

@@ -14,14 +14,19 @@ const createOrder = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {
-      res.status(500).json({
+      res.status(400).json({
         message: 'Validation failed',
         success: false,
         err,
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      res.send(err);
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to create order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
     }
   }
 };
@@ -36,14 +41,19 @@ const getSingleOrder = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {
-      res.status(500).json({
+      res.status(400).json({
         message: 'Validation failed',
         success: false,
         err,
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      res.send(err);
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
     }
   }
 };
@@ -58,13 +68,22 @@ const updateSingleOrder = async (req: Request, res: Response) => {
       success: true,
       data: result,
     });
-  } catch (error: any) {
-    res.status(500).json({
-      message: error.name || 'Something Went Wrong, So Data Is Not Inserted',
-      success: false,
-      error,
-      stack: error.stack || 'No stack trace available',
-    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to update order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 
@@ -77,13 +96,22 @@ const deleteSingleOrder = async (req: Request, res: Response) => {
       success: true,
       data: {},
     });
-  } catch (error: any) {
-    res.status(500).json({
-      message: error.name || 'Something Went Wrong, So Data Is Not Inserted',
-      success: false,
-      error,
-      stack: error.stack || 'No stack trace available',
-    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to delete order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
   }
 };
 
@@ -97,14 +125,19 @@ const getOrders = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {
-      res.status(500).json({
+      res.status(400).json({
         message: 'Validation failed',
         success: false,
         err,
         stack: err.stack || 'No stack trace available',
       });
     } else {
-      res.send(err);
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
     }
   }
 };

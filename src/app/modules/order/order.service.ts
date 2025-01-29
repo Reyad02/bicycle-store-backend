@@ -3,6 +3,7 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import IOrder from './order.interface';
 import Order from './order.model';
 import Bicycle from '../bicycle/bicycle.model';
+import CustomError from '../../error/CustomError';
 
 const createOrder = async (orderInfo: IOrder) => {
   const session = await mongoose.startSession();
@@ -23,7 +24,7 @@ const createOrder = async (orderInfo: IOrder) => {
 
     const result = await Order.create([orderInfo], { session });
     if (!result) {
-      throw new Error('Failed to order');
+      throw new CustomError(400, "Can not create a order")
     }
 
     for (const item of orderInfo.items) {
