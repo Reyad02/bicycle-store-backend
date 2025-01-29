@@ -120,11 +120,12 @@ const deleteSingleBicycle = async (req: Request, res: Response) => {
 
 const getBicycles = async (req: Request, res: Response) => {
   try {
-    const { products } = await bicycleServices.getBicycles(req.query);
+    const { products, metaData } = await bicycleServices.getBicycles(req.query);
     res.json({
       message: 'Bicycles retrieved successfully',
       success: true,
       data: products,
+      metaData,
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {

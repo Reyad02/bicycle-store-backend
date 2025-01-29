@@ -117,11 +117,12 @@ const deleteSingleOrder = async (req: Request, res: Response) => {
 
 const getOrders = async (req: Request, res: Response) => {
   try {
-    const { orders } = await orderServices.getOrders(req.query);
+    const { orders, metaData } = await orderServices.getOrders(req.query);
     res.json({
       message: 'Orders retrieved successfully',
       success: true,
       data: orders,
+      metaData: metaData,
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {

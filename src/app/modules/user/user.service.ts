@@ -27,10 +27,10 @@ const getUsers = async (query: Record<string, unknown>) => {
     .sort()
     .pagination()
     .select();
-  const products = await result.defaultRes;
+  const users = await result.defaultRes;
   const metaData = await result.countTotal();
   return {
-    products,
+    users,
     metaData,
   };
 };

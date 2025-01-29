@@ -90,11 +90,12 @@ const updateSingleUser = async (req: Request, res: Response) => {
 
 const getUsers = async (req: Request, res: Response) => {
   try {
-    const { products } = await userServices.getUsers(req.query);
+    const { users, metaData } = await userServices.getUsers(req.query);
     res.json({
       message: 'Users retrieved successfully',
       success: true,
-      data: products,
+      data: users,
+      metaData: metaData,
     });
   } catch (err: any) {
     if (err.name === 'ZodError') {
