@@ -8,23 +8,29 @@ import CustomError from '../../error/CustomError';
 const createOrder = async (orderInfo: IOrder) => {
   const session = await mongoose.startSession();
   try {
+    session.startTransaction();
+
     if (!orderInfo.totalPrice) {
       let totalPrice = 0;
       for (const item of orderInfo.items) {
-        const bicycle = await Bicycle.findById(item.bicycle);
+        const bicycle = await Bicycle.findById(item.bicycle).session(session);
         if (!bicycle) {
-          return new Error('Bicycle is not found');
+          throw new CustomError(404, 'Bicycle is not found');
+        }
+        if (bicycle.quantity < item.quantity) {
+          if (bicycle.quantity === 0) {
+            throw new CustomError(400, `${bicycle.name} is not available`);
+          }
+          throw new CustomError(400, `The available quantity of ${bicycle.name} is ${bicycle.quantity}`);
         }
         totalPrice += bicycle.price * item.quantity;
       }
       orderInfo.totalPrice = totalPrice;
     }
 
-    session.startTransaction();
-
     const result = await Order.create([orderInfo], { session });
     if (!result) {
-      throw new CustomError(400, "Can not create a order")
+      throw new CustomError(400, 'Can not create a order');
     }
 
     for (const item of orderInfo.items) {
@@ -42,7 +48,7 @@ const createOrder = async (orderInfo: IOrder) => {
   } catch (err: any) {
     await session.abortTransaction();
     await session.endSession();
-    throw new Error(err);
+    throw new Error(err.message);
   }
 };
 

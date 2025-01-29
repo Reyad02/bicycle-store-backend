@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose';
 import IUser from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
+import CustomError from '../../error/CustomError';
 
 const userSchema = new Schema<IUser>(
   {
@@ -30,7 +31,7 @@ const userSchema = new Schema<IUser>(
 userSchema.pre('save', async function (next) {
   const isUserExist = await User.findOne({ email: this.email });
   if (isUserExist) {
-    throw new Error('User with this email already exists!');
+    throw new CustomError(400,'User with this email already exists!')
   }
   next();
 });
