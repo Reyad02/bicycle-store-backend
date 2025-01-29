@@ -8,4 +8,5 @@ export default {
   salt_rounds: process.env.SALT_ROUNDS,
   jwt_secret: process.env.JWT_SECRET,
   jwt_expiration: process.env.JWT_EXPIRED,
+  NODE_ENV: process.env.NODE_ENV,
 };
