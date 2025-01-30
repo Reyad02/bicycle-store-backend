@@ -6,7 +6,7 @@ const createUser = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const parseBody = UserValidationSchema.parse(body);
-    const result = await userServices.createUser(parseBody);
+    const result = await userServices.createUser(parseBody, req.file);
     res.json({
       message: 'User created successfully',
       success: true,

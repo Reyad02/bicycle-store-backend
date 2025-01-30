@@ -34,6 +34,9 @@ const bicycleSchema = new Schema<Ibicycle>(
       type: Boolean,
       default: true,
     },
+    image: {
+      type: String,
+    },
   },
   { timestamps: true },
 );

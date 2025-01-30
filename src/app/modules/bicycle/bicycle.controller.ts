@@ -6,7 +6,7 @@ const createBicycle = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const parseBody = BicycleValidationSchema.parse(body);
-    const result = await bicycleServices.createBicycle(parseBody);
+    const result = await bicycleServices.createBicycle(parseBody,req.file);
     res.json({
       message: 'Bicycle created successfully',
       success: true,

@@ -9,4 +9,7 @@ export default {
   jwt_secret: process.env.JWT_SECRET,
   jwt_expiration: process.env.JWT_EXPIRED,
   NODE_ENV: process.env.NODE_ENV,
+  cloudinary_cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+  cloudinary_apiKey: process.env.CLOUDINARY_API_KEY,
+  cloudinary_secretKey: process.env.CLOUDINARY_SECRET_KEY,
 };

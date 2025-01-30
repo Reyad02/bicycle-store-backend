@@ -24,6 +24,9 @@ const userSchema = new Schema<IUser>(
       enum: ['Customer', 'Admin'],
       required: true,
     },
+    profileImg: {
+      type: String,
+    },
   },
   { timestamps: true },
 );
@@ -31,7 +34,7 @@ const userSchema = new Schema<IUser>(
 userSchema.pre('save', async function (next) {
   const isUserExist = await User.findOne({ email: this.email });
   if (isUserExist) {
-    throw new CustomError(400,'User with this email already exists!')
+    throw new CustomError(400, 'User with this email already exists!');
   }
   next();
 });

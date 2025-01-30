@@ -1,9 +1,17 @@
 import QueryBuilder from '../../builder/QueryBuilder';
+import { sendImageToCloudinary } from '../../utils/sendImage';
 import { UserSearchableFields } from './user.constant';
 import IUser from './user.interface';
 import User from './user.model';
 
-const createUser = async (userDetails: IUser): Promise<IUser> => {
+const createUser = async (userDetails: IUser, file: any): Promise<IUser> => {
+  // console.log(userDetails, file);
+  if (file) {
+    const imageName = `${userDetails.email}`;
+    const path = file;
+    const { secure_url } = await sendImageToCloudinary(imageName, path.buffer);
+    userDetails.profileImg = secure_url as string;
+  }
   const result = await User.create(userDetails);
   return result;
 };

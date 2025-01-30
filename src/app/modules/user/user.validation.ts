@@ -14,6 +14,7 @@ const UserValidationSchema = z.object({
   userType: z.enum(['Customer', 'Admin'], {
     message: "Type must be one of 'Admin' or 'Customer'",
   }),
+  profileImg: z.string().optional(),
 });
 
 export default UserValidationSchema;

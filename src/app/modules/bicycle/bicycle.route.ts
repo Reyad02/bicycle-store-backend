@@ -1,11 +1,21 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { bicyclesController } from './bicycle.controller';
 import auth from '../../middleware/auth';
 import { ROLE } from '../user/user.constant';
+import { upload } from '../../utils/sendImage';
 
 const bicycleRouter = Router();
 
-bicycleRouter.post('/', auth(ROLE.Admin), bicyclesController.createBicycle);
+bicycleRouter.post(
+  '/',
+  upload.single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
+  auth(ROLE.Admin),
+  bicyclesController.createBicycle,
+);
 bicycleRouter.delete(
   '/:productId',
   auth(ROLE.Admin),

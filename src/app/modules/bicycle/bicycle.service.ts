@@ -1,9 +1,19 @@
 import QueryBuilder from '../../builder/QueryBuilder';
+import { sendImageToCloudinary } from '../../utils/sendImage';
 import { BicycleSearchableFields } from './bicycle.constant';
 import Ibicycle from './bicycle.interface';
 import Bicycle from './bicycle.model';
 
-const createBicycle = async (bicycle: Ibicycle): Promise<Ibicycle> => {
+const createBicycle = async (
+  bicycle: Ibicycle,
+  file: any,
+): Promise<Ibicycle> => {
+  if (file) {
+    const imageName = `${bicycle.name}`;
+    const path = file;
+    const { secure_url } = await sendImageToCloudinary(imageName, path.buffer);
+    bicycle.image = secure_url as string;
+  }
   const result = await Bicycle.create(bicycle);
   return result;
 };

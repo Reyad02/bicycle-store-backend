@@ -22,6 +22,7 @@ const BicycleValidationSchema = z.object({
     .int({ message: 'Quantity must be an integer' })
     .min(0, { message: 'Quantity must be a non-negative integer' }),
   inStock: z.boolean().default(true),
+  image: z.string().optional(),
 });
 
 export default BicycleValidationSchema;
