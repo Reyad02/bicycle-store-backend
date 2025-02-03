@@ -28,12 +28,10 @@ bicycleRouter.put(
 );
 bicycleRouter.get(
   '/:productId',
-  auth(ROLE.Customer, ROLE.Admin),
   bicyclesController.getSingleBicycle,
 );
 bicycleRouter.get(
   '/',
-  auth(ROLE.Customer, ROLE.Admin),
   bicyclesController.getBicycles,
 );
 
