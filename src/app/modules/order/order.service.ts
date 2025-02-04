@@ -6,6 +6,7 @@ import Bicycle from '../bicycle/bicycle.model';
 import CustomError from '../../error/CustomError';
 import SSLCommerz from 'sslcommerz-lts';
 import config from '../../config';
+import User from '../user/user.model';
 
 const createOrder = async (orderInfo: IOrder) => {
   const session = await mongoose.startSession();
@@ -187,8 +188,9 @@ const getOrders = async (query: Record<string, unknown>) => {
   };
 };
 
-const getMyOrders = async (userId: string) => {
-  const result = await Order.find({ user: userId, paymentStatus: 'Paid' });
+const getMyOrders = async (email: string) => {
+  const user = await User.findOne({ email: email });
+  const result = await Order.find({ user: user?._id, paymentStatus: 'Paid' }).populate('items.bicycle');
   return result;
 };
 

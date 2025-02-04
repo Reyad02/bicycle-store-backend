@@ -19,7 +19,7 @@ orderRouter.put(
   orderController.updateSingleOrder,
 );
 orderRouter.get(
-  '/:userId',
+  '/myOrder',
   auth(ROLE.Customer, ROLE.Admin),
   orderController.getMyOrders,
 );

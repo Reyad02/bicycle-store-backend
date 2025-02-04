@@ -196,11 +196,10 @@ const failPaymentSingleOrder = async (req: Request, res: Response) => {
   }
 };
 
-
 const getMyOrders = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
-    const result = await orderServices.getMyOrders(userId);
+    const { email } = req.user;
+    const result = await orderServices.getMyOrders(email);
     res.json({
       message: 'My orders retrieved successfully',
       success: true,
@@ -233,5 +232,5 @@ export const orderController = {
   getOrders,
   successPaymentSingleOrder,
   failPaymentSingleOrder,
-  getMyOrders
+  getMyOrders,
 };

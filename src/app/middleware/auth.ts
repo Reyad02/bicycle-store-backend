@@ -4,6 +4,7 @@ import { ROLE } from '../modules/user/user.constant';
 import { verifyToken } from '../modules/auth/auth.utils';
 import config from '../config';
 import User from '../modules/user/user.model';
+import { JwtPayload } from 'jsonwebtoken';
 
 type TUserRole = keyof typeof ROLE;
 
@@ -29,6 +30,7 @@ const auth = (...roles: TUserRole[]) => {
         throw new CustomError(401, 'You can not see this page');
       }
 
+      req.user = decodedToken as JwtPayload
       next();
     } catch (err: any) {
       res.status(err.statusCode || 500).json({
