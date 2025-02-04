@@ -27,7 +27,8 @@ const loginUser = async (loginInfo: IAuthUser) => {
     config.jwt_expiration as string,
   );
 
-  return token;
+  // return token;
+  return {isUserExist,token}
 };
 
 export const authServices = {

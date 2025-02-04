@@ -143,10 +143,95 @@ const getOrders = async (req: Request, res: Response) => {
   }
 };
 
+const successPaymentSingleOrder = async (req: Request, res: Response) => {
+  try {
+    const { orderId } = req.params;
+    // const payload = req.body;
+    const result = await orderServices.handlePaymentSuccess(orderId);
+    // res.json({
+    //   message: 'Order payment success',
+    //   success: true,
+    //   data: result,
+    // });
+    res.redirect(result.link);
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to update order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+const failPaymentSingleOrder = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.handlePaymentFail();
+    res.redirect(result);
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to update order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+
+const getMyOrders = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await orderServices.getMyOrders(userId);
+    res.json({
+      message: 'My orders retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get user',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
 export const orderController = {
   createOrder,
   getSingleOrder,
   updateSingleOrder,
   deleteSingleOrder,
   getOrders,
+  successPaymentSingleOrder,
+  failPaymentSingleOrder,
+  getMyOrders
 };

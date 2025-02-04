@@ -6,6 +6,8 @@ import { ROLE } from '../user/user.constant';
 const orderRouter = Router();
 
 orderRouter.post('/', auth(ROLE.Customer), orderController.createOrder);
+orderRouter.post('/:orderId', orderController.successPaymentSingleOrder);
+orderRouter.post('/fail/:orderId', orderController.failPaymentSingleOrder);
 orderRouter.delete(
   '/:orderId',
   auth(ROLE.Admin),
@@ -15,6 +17,11 @@ orderRouter.put(
   '/:orderId',
   auth(ROLE.Admin),
   orderController.updateSingleOrder,
+);
+orderRouter.get(
+  '/:userId',
+  auth(ROLE.Customer, ROLE.Admin),
+  orderController.getMyOrders,
 );
 orderRouter.get(
   '/:orderId',

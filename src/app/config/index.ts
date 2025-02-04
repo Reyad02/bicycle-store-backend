@@ -12,4 +12,6 @@ export default {
   cloudinary_cloudName: process.env.CLOUDINARY_CLOUD_NAME,
   cloudinary_apiKey: process.env.CLOUDINARY_API_KEY,
   cloudinary_secretKey: process.env.CLOUDINARY_SECRET_KEY,
+  SSLCOMMERZ_STORE_ID: process.env.SSLCOMMERZ_STORE_ID,
+  SSLCOMMERZ_STORE_PASSWORD: process.env.SSLCOMMERZ_STORE_PASSWORD,
 };
