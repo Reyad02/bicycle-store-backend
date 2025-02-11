@@ -16,15 +16,29 @@ bicycleRouter.post(
   auth(ROLE.Admin),
   bicyclesController.createBicycle,
 );
+bicycleRouter.put(
+  '/:productId',
+  upload.single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
+  auth(ROLE.Admin),
+  bicyclesController.updateSingleBicycle,
+);
 bicycleRouter.delete(
   '/:productId',
   auth(ROLE.Admin),
   bicyclesController.deleteSingleBicycle,
 );
-bicycleRouter.put(
-  '/:productId',
-  auth(ROLE.Admin),
-  bicyclesController.updateSingleBicycle,
+// bicycleRouter.put(
+//   '/:productId',
+//   auth(ROLE.Admin),
+//   bicyclesController.updateSingleBicycle,
+// );
+bicycleRouter.get(
+  '/getBrands',
+  bicyclesController.getBicyclesBrands,
 );
 bicycleRouter.get(
   '/:productId',

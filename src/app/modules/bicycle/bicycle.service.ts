@@ -23,10 +23,22 @@ const getSingleBicycle = async (id: string) => {
   return result;
 };
 
-const updateSingleBicycle = async (id: string, payload: Ibicycle) => {
-  const result = await Bicycle.findByIdAndUpdate(id, payload, {
-    new: true,
-  });
+const updateSingleBicycle = async (
+  id: string,
+  payload: Ibicycle,
+  file: any,
+) => {
+  // const result = await Bicycle.findByIdAndUpdate(id, payload, {
+  //   new: true,
+  // });
+  // return result;
+  if (file) {
+    const imageName = `${payload.name}`;
+    const path = file;
+    const { secure_url } = await sendImageToCloudinary(imageName, path.buffer);
+    payload.image = secure_url as string;
+  }
+  const result = await Bicycle.create(payload);
   return result;
 };
 
@@ -50,10 +62,16 @@ const getBicycles = async (query: Record<string, unknown>) => {
   };
 };
 
+const getBicyclesBrands = async () => {
+  const result = await Bicycle.distinct('brand');
+  return result;
+};
+
 export const bicycleServices = {
   createBicycle,
   getSingleBicycle,
   updateSingleBicycle,
   deleteSingleBicycle,
   getBicycles,
+  getBicyclesBrands,
 };

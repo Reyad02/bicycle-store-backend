@@ -6,7 +6,7 @@ const createBicycle = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const parseBody = BicycleValidationSchema.parse(body);
-    const result = await bicycleServices.createBicycle(parseBody,req.file);
+    const result = await bicycleServices.createBicycle(parseBody, req.file);
     res.json({
       message: 'Bicycle created successfully',
       success: true,
@@ -61,11 +61,19 @@ const getSingleBicycle = async (req: Request, res: Response) => {
 const updateSingleBicycle = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const payload = req.body;
+    // const body = req.body;
     const result = await bicycleServices.updateSingleBicycle(
       productId,
-      payload,
+      req.body,
+      req.file,
     );
+
+    // const { productId } = req.params;
+    // const payload = req.body;
+    // const result = await bicycleServices.updateSingleBicycle(
+    //   productId,
+    //   payload,
+    // );
     res.json({
       message: 'Bicycle updated successfully',
       success: true,
@@ -146,10 +154,38 @@ const getBicycles = async (req: Request, res: Response) => {
   }
 };
 
+const getBicyclesBrands = async (req: Request, res: Response) => {
+  try {
+    const result = await bicycleServices.getBicyclesBrands();
+    res.json({
+      message: 'Bicycles brands retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get bicycles',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
 export const bicyclesController = {
   createBicycle,
   getSingleBicycle,
   updateSingleBicycle,
   deleteSingleBicycle,
   getBicycles,
+  getBicyclesBrands,
 };
