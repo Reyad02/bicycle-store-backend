@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import BicycleValidationSchema from './bicycle.validation';
 import { bicycleServices } from './bicycle.service';
+import { BicycleValidation } from './bicycle.validation';
 
 const createBicycle = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-    const parseBody = BicycleValidationSchema.parse(body);
+    const parseBody = BicycleValidation.BicycleValidationSchema.parse(body);
     const result = await bicycleServices.createBicycle(parseBody, req.file);
     res.json({
       message: 'Bicycle created successfully',
@@ -61,10 +61,11 @@ const getSingleBicycle = async (req: Request, res: Response) => {
 const updateSingleBicycle = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    // const body = req.body;
+    const body = req.body;
+    const parseBody = BicycleValidation.BicycleUpdateValidationSchema.parse(body);
     const result = await bicycleServices.updateSingleBicycle(
       productId,
-      req.body,
+      parseBody,
       req.file,
     );
 

@@ -25,20 +25,16 @@ const getSingleBicycle = async (id: string) => {
 
 const updateSingleBicycle = async (
   id: string,
-  payload: Ibicycle,
+  payload: Partial<Ibicycle>,
   file: any,
 ) => {
-  // const result = await Bicycle.findByIdAndUpdate(id, payload, {
-  //   new: true,
-  // });
-  // return result;
   if (file) {
-    const imageName = `${payload.name}`;
+    const imageName = `${payload!.name}`;
     const path = file;
     const { secure_url } = await sendImageToCloudinary(imageName, path.buffer);
     payload.image = secure_url as string;
   }
-  const result = await Bicycle.create(payload);
+  const result = await Bicycle.findByIdAndUpdate(id,payload);
   return result;
 };
 
