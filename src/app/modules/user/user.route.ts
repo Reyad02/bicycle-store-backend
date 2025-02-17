@@ -15,7 +15,7 @@ userRouter.post(
   },
   userController.createUser,
 );
-userRouter.put('/:email', auth(ROLE.Customer), userController.updateSingleUser);
+userRouter.put('/:email', auth(ROLE.Customer, ROLE.Admin), userController.updateSingleUser);
 userRouter.get(
   '/:email',
   auth(ROLE.Customer, ROLE.Admin),

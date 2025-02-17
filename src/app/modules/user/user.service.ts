@@ -5,7 +5,6 @@ import IUser from './user.interface';
 import User from './user.model';
 
 const createUser = async (userDetails: IUser, file: any): Promise<IUser> => {
-  // console.log(userDetails, file);
   if (file) {
     const imageName = `${userDetails.email}`;
     const path = file;

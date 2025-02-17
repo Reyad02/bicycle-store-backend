@@ -45,7 +45,6 @@ const createOrder = async (orderInfo: IOrder) => {
 
     const transactionId = 'TXN_' + new Date().getTime(); // Unique Transaction ID
 
-    // payment
     const data = {
       total_amount: totalPrice,
       currency: 'BDT',
@@ -79,15 +78,6 @@ const createOrder = async (orderInfo: IOrder) => {
 
     const response = await sslcz.init(data);
 
-    // for (const item of orderInfo.items) {
-    //   await Bicycle.findByIdAndUpdate(
-    //     item.bicycle,
-    //     {
-    //       $inc: { quantity: -item.quantity },
-    //     },
-    //     { session },
-    //   );
-    // }
     await session.commitTransaction();
     await session.endSession();
     const insertedOrder = await result[0].populate('items.bicycle');
@@ -99,30 +89,16 @@ const createOrder = async (orderInfo: IOrder) => {
   }
 };
 
-// export const handlePaymentSuccess = async (id: string) => {
-//   const result = await Order.findByIdAndUpdate(
-//     id,
-//     { paymentStatus: 'Paid', status: 'Delivered' },
-//     {
-//       new: true,
-//     },
-//   ).populate('items.bicycle');
-//   const link = 'http://localhost:5173/orders/success';
-//   return { result, link };
-// };
-
 export const handlePaymentSuccess = async (id: string) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
 
-    // Find the order
     const order = await Order.findById(id).session(session);
     if (!order) {
       throw new CustomError(400, 'Order not found');
     }
 
-    // Reduce product quantity only after payment success
     for (const item of order.items) {
       const bicycle = await Bicycle.findById(item.bicycle).session(session);
       if (!bicycle) {
@@ -135,9 +111,7 @@ export const handlePaymentSuccess = async (id: string) => {
       await bicycle.save({ session });
     }
 
-    // Update order status to 'Paid' and 'Delivered'
     order.paymentStatus = 'Paid';
-    order.status = 'Delivered';
     await order.save({ session });
 
     await session.commitTransaction();
@@ -175,7 +149,6 @@ const deleteSingleOrder = async (id: string) => {
 
 const getOrders = async (query: Record<string, unknown>) => {
   const result = new QueryBuilder(Order.find(), query)
-    //   .search(BicycleSearchableFields)
     .filter()
     .sort()
     .pagination()

@@ -27,6 +27,10 @@ const userSchema = new Schema<IUser>(
     profileImg: {
       type: String,
     },
+    accountStatus: {
+      type: Boolean,
+      default: true
+    },
   },
   { timestamps: true },
 );
