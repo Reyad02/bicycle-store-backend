@@ -153,7 +153,9 @@ const getOrders = async (query: Record<string, unknown>) => {
     .sort()
     .pagination()
     .select();
-  const orders = await result.defaultRes.populate('items.bicycle');
+  const orders = await result.defaultRes
+    .populate('items.bicycle')
+    .populate('user');
   const metaData = await result.countTotal();
   return {
     orders,
@@ -163,7 +165,110 @@ const getOrders = async (query: Record<string, unknown>) => {
 
 const getMyOrders = async (email: string) => {
   const user = await User.findOne({ email: email });
-  const result = await Order.find({ user: user?._id, paymentStatus: 'Paid' }).populate('items.bicycle');
+  const result = await Order.find({
+    user: user?._id,
+    paymentStatus: 'Paid',
+  }).populate('items.bicycle');
+  return result;
+};
+
+const getTopProducts = async () => {
+  const result = await Order.aggregate([
+    { $match: { paymentStatus: 'Paid' } },
+    { $unwind: '$items' },
+    {
+      $group: {
+        _id: '$items.bicycle',
+        totalQuantity: { $sum: '$items.quantity' },
+      },
+    },
+    { $sort: { totalQuantity: -1 } },
+    { $limit: 5 },
+    {
+      $lookup: {
+        from: 'bicycles',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'bicycleDetails',
+      },
+    },
+    { $unwind: '$bicycleDetails' },
+    {
+      $project: {
+        _id: 0,
+        bicycleId: '$_id',
+        totalQuantity: 1,
+        bicycleDetails: 1,
+      },
+    },
+  ]);
+
+  return result;
+};
+
+const totalDeliveredProducts = async () => {
+  const result = await Order.aggregate([
+    { $match: { paymentStatus: 'Paid', status: 'Delivered' } },
+    { $unwind: '$items' },
+    {
+      $group: {
+        _id: null,
+        totalDelivered: { $sum: '$items.quantity' },
+      },
+    },
+    { $project: { _id: 0, totalDelivered: 1 } },
+  ]);
+  return result.length > 0 ? result[0].totalDelivered : 0;
+};
+
+const totalPendingProducts = async () => {
+  const result = await Order.aggregate([
+    { $match: { paymentStatus: 'Paid', status: 'Pending' } },
+    { $unwind: '$items' },
+    {
+      $group: {
+        _id: null,
+        totalPending: { $sum: '$items.quantity' },
+      },
+    },
+    { $project: { _id: 0, totalPending: 1 } },
+  ]);
+  return result.length > 0 ? result[0].totalPending : 0;
+};
+
+const getTotalIncome = async () => {
+  const result = await Order.aggregate([
+    { $match: { paymentStatus: 'Paid' } },
+    {
+      $group: {
+        _id: null,
+        totalIncome: { $sum: '$totalPrice' },
+      },
+    },
+    {
+      $project: { _id: 0, totalIncome: 1 },
+    },
+  ]);
+
+  return result.length > 0 ? result[0].totalIncome : 0;
+};
+
+const last7DaysIncome = async () => {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 30);
+  const result = await Order.aggregate([
+    { $match: { paymentStatus: 'Paid', createdAt: { $gte: sevenDaysAgo } } },
+    { $unwind: '$items' },
+    {
+      $group: {
+        _id: {
+          $dateToString: { format: '%Y-%m-%d', date: '$createdAt' },
+        },
+        totalSold: { $sum: '$items.quantity' },
+      },
+    },
+    { $sort: { _id: 1 } },
+  ]);
   return result;
 };
 
@@ -176,4 +281,9 @@ export const orderServices = {
   handlePaymentSuccess,
   handlePaymentFail,
   getMyOrders,
+  getTopProducts,
+  totalDeliveredProducts,
+  totalPendingProducts,
+  getTotalIncome,
+  last7DaysIncome,
 };

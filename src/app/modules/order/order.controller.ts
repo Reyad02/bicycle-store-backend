@@ -224,6 +224,141 @@ const getMyOrders = async (req: Request, res: Response) => {
   }
 };
 
+const totalPendingProducts = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.totalPendingProducts();
+    res.json({
+      message: 'Total pending product count retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+const getTotalIncome = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.getTotalIncome();
+    res.json({
+      message: 'Total income retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+const totalDeliveredProducts = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.totalDeliveredProducts();
+    res.json({
+      message: 'Total delivered product count retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+const last7DaysIncome = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.last7DaysIncome();
+    res.json({
+      message: 'Top Products retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
+const getTopProducts = async (req: Request, res: Response) => {
+  try {
+    const result = await orderServices.getTopProducts();
+    res.json({
+      message: 'Top Products retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        err,
+        stack: err.stack || 'No stack trace available',
+      });
+    } else {
+      res.status(err.statusCode || 500).json({
+        message: err.message || 'Failed to get order',
+        success: false,
+        error: err,
+        stack: err?.stack,
+      });
+    }
+  }
+};
+
 export const orderController = {
   createOrder,
   getSingleOrder,
@@ -233,4 +368,9 @@ export const orderController = {
   successPaymentSingleOrder,
   failPaymentSingleOrder,
   getMyOrders,
+  getTopProducts,
+  totalDeliveredProducts,
+  totalPendingProducts,
+  getTotalIncome,
+  last7DaysIncome,
 };
