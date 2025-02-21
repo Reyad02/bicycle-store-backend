@@ -34,15 +34,12 @@ const BicycleValidationSchema = z.object({
     .nonempty({ message: 'Seatpost cannot be empty' }),
   weight: z
     .number({ required_error: 'Weight is required' })
-    .int({ message: 'Weight must be an integer' })
     .min(0, { message: 'Weight must be a non-negative integer' }),
   torque: z
     .number({ required_error: 'Torque is required' })
-    .int({ message: 'Torque must be an integer' })
     .min(0, { message: 'Torque must be a non-negative integer' }),
   frameSize: z
     .number({ required_error: 'Frame Size is required' })
-    .int({ message: 'Frame Size must be an integer' })
     .min(0, { message: 'Frame Size must be a non-negative integer' }),
   chain: z
     .string({ required_error: 'Chain is required' })
@@ -90,17 +87,14 @@ const BicycleUpdateValidationSchema = z.object({
     .optional(),
   weight: z
     .number({ required_error: 'Weight is required' })
-    .int({ message: 'Weight must be an integer' })
     .min(0, { message: 'Weight must be a non-negative integer' })
     .optional(),
   torque: z
     .number({ required_error: 'Torque is required' })
-    .int({ message: 'Torque must be an integer' })
     .min(0, { message: 'Torque must be a non-negative integer' })
     .optional(),
   frameSize: z
     .number({ required_error: 'Frame Size is required' })
-    .int({ message: 'Frame Size must be an integer' })
     .min(0, { message: 'Frame Size must be a non-negative integer' })
     .optional(),
   chain: z.string().nonempty({ message: 'Chain cannot be empty' }).optional(),
