@@ -37,6 +37,34 @@ const bicycleSchema = new Schema<Ibicycle>(
     image: {
       type: String,
     },
+    color: {
+      type: String,
+      required: true,
+    },
+    material: {
+      type: String,
+      required: true,
+    },
+    seatpost: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: Number,
+      required: true,
+    },
+    torque: {
+      type: Number,
+      required: true,
+    },
+    frameSize: {
+      type: Number,
+      required: true,
+    },
+    chain: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 );

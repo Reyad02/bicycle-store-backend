@@ -31,11 +31,6 @@ bicycleRouter.delete(
   auth(ROLE.Admin),
   bicyclesController.deleteSingleBicycle,
 );
-// bicycleRouter.put(
-//   '/:productId',
-//   auth(ROLE.Admin),
-//   bicyclesController.updateSingleBicycle,
-// );
 bicycleRouter.get(
   '/getBrands',
   bicyclesController.getBicyclesBrands,
