@@ -49,10 +49,10 @@ const createOrder = async (orderInfo: IOrder) => {
       total_amount: totalPrice,
       currency: 'BDT',
       tran_id: transactionId,
-      success_url: `http://localhost:3000/api/orders/${result[0]._id}`,
-      fail_url: `http://localhost:3000/api/orders/fail/${result[0]._id}`,
-      cancel_url: 'http://localhost:3000/orders/cancel',
-      ipn_url: 'http://localhost:3000/orders/ipn',
+      success_url: `https://bicycle-store-backend-seven.vercel.app/api/orders/${result[0]._id}`,
+      fail_url: `https://bicycle-store-backend-seven.vercel.app/api/orders/fail/${result[0]._id}`,
+      cancel_url: 'https://bicycle-store-backend-seven.vercel.app/orders/cancel',
+      ipn_url: 'https://bicycle-store-backend-seven.vercel.app/orders/ipn',
       shipping_method: 'Courier',
       product_name: 'Bicycle',
       product_category: 'Bicycle',
@@ -117,7 +117,7 @@ export const handlePaymentSuccess = async (id: string) => {
     await session.commitTransaction();
     session.endSession();
 
-    return { result: order, link: 'http://localhost:5173/orders/success' };
+    return { result: order, link: 'https://bicycle-store-nine-flame.vercel.app/orders/success' };
   } catch (err: any) {
     await session.abortTransaction();
     session.endSession();
@@ -126,7 +126,7 @@ export const handlePaymentSuccess = async (id: string) => {
 };
 
 export const handlePaymentFail = async () => {
-  const link = 'http://localhost:5173/orders/fail';
+  const link = 'https://bicycle-store-nine-flame.vercel.app/orders/fail';
   return link;
 };
 

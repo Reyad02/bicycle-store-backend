@@ -11,6 +11,10 @@ const loginUser = async (loginInfo: IAuthUser) => {
     throw new CustomError(404, 'User not found');
   }
 
+  if(!isUserExist.accountStatus){
+    throw new CustomError(404, 'You are blocked');
+  }
+
   const isPassWordMatched = await bcrypt.compare(
     loginInfo.password,
     isUserExist.password,
