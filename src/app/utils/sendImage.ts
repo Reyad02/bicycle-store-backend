@@ -8,15 +8,12 @@ export const sendImageToCloudinary = (
 ): Promise<Record<string, unknown>> => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream(
-        { public_id: imageName.trim() },
-        function (error, result) {
-          if (error) {
-            reject(error);
-          }
-          resolve(result as UploadApiResponse);
-        },
-      )
+      .upload_stream({ public_id: imageName.trim() }, function (error, result) {
+        if (error) {
+          reject(error);
+        }
+        resolve(result as UploadApiResponse);
+      })
       .end(buffer);
   });
 };

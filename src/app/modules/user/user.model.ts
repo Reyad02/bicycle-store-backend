@@ -29,7 +29,7 @@ const userSchema = new Schema<IUser>(
     },
     accountStatus: {
       type: Boolean,
-      default: true
+      default: true,
     },
   },
   { timestamps: true },

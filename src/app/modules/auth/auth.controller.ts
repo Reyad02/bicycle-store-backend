@@ -34,7 +34,7 @@ const changePass = async (req: Request, res: Response) => {
   try {
     const { email } = req.user;
     const passwords = req.body;
-    const result = await authServices.changePass(email,passwords);
+    const result = await authServices.changePass(email, passwords);
     res.json({
       message: 'Password successfully changed',
       success: true,
@@ -61,5 +61,5 @@ const changePass = async (req: Request, res: Response) => {
 
 export const authControllers = {
   loginUser,
-  changePass
+  changePass,
 };

@@ -30,7 +30,7 @@ const auth = (...roles: TUserRole[]) => {
         throw new CustomError(401, 'You can not see this page');
       }
 
-      req.user = decodedToken as JwtPayload
+      req.user = decodedToken as JwtPayload;
       next();
     } catch (err: any) {
       res.status(err.statusCode || 500).json({

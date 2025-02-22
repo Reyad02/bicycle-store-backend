@@ -62,7 +62,8 @@ const updateSingleBicycle = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const body = req.body;
-    const parseBody = BicycleValidation.BicycleUpdateValidationSchema.parse(body);
+    const parseBody =
+      BicycleValidation.BicycleUpdateValidationSchema.parse(body);
     const result = await bicycleServices.updateSingleBicycle(
       productId,
       parseBody,

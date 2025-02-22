@@ -9,13 +9,13 @@ interface Ibicycle {
   image?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  color: string; 
-  material: string; 
-  seatpost: string; 
-  weight: number; 
-  torque: number; 
-  frameSize: number; 
-  chain: string; 
+  color: string;
+  material: string;
+  seatpost: string;
+  weight: number;
+  torque: number;
+  frameSize: number;
+  chain: string;
 }
 
 export default Ibicycle;

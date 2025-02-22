@@ -149,5 +149,5 @@ export const userController = {
   getSingleUser,
   updateSingleUser,
   getUsers,
-  getMyProfile
+  getMyProfile,
 };

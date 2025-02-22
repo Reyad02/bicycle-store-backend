@@ -4,4 +4,3 @@ export const ROLE = {
   Admin: 'Admin',
   Customer: 'Customer',
 } as const;
-

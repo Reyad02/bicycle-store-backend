@@ -1,9 +1,9 @@
 declare module 'sslcommerz-lts' {
-//   interface SSLCommerzConfig {
-//     store_id: string;
-//     store_passwd: string;
-//     is_live: boolean;
-//   }
+  //   interface SSLCommerzConfig {
+  //     store_id: string;
+  //     store_passwd: string;
+  //     is_live: boolean;
+  //   }
 
   interface PaymentData {
     total_amount: number;

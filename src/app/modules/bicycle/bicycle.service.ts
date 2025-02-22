@@ -34,7 +34,7 @@ const updateSingleBicycle = async (
     const { secure_url } = await sendImageToCloudinary(imageName, path.buffer);
     payload.image = secure_url as string;
   }
-  const result = await Bicycle.findByIdAndUpdate(id,payload);
+  const result = await Bicycle.findByIdAndUpdate(id, payload);
   return result;
 };
 

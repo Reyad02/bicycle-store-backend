@@ -31,17 +31,8 @@ bicycleRouter.delete(
   auth(ROLE.Admin),
   bicyclesController.deleteSingleBicycle,
 );
-bicycleRouter.get(
-  '/getBrands',
-  bicyclesController.getBicyclesBrands,
-);
-bicycleRouter.get(
-  '/:productId',
-  bicyclesController.getSingleBicycle,
-);
-bicycleRouter.get(
-  '/',
-  bicyclesController.getBicycles,
-);
+bicycleRouter.get('/getBrands', bicyclesController.getBicyclesBrands);
+bicycleRouter.get('/:productId', bicyclesController.getSingleBicycle);
+bicycleRouter.get('/', bicyclesController.getBicycles);
 
 export default bicycleRouter;
