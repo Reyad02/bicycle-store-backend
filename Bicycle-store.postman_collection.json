@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "9ae9e6ac-a268-48d8-a256-14e7abd087e2",
+		"name": "Bicycle-store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38349072"
+	},
+	"item": [
+		{
+			"name": "Bicycles",
+			"item": [
+				{
+					"name": "create-bicycle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0MDA1MDM3NiwiZXhwIjoxNzQwOTE0Mzc2fQ.qz8KffisAJxAQRWpHGKP3TkJsRUJPjFrBVZL35ywXjI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Reyad/Downloads/847159.jpg"
+								},
+								{
+									"key": "data",
+									"value": "{\n  \"name\": \"Cube Stereo Hybrid 140\",\n  \"brand\": \"Cube\",\n  \"price\": 4500,\n  \"type\": \"Electric\",\n  \"description\": \"The Cube Stereo Hybrid 140 is a top-of-the-line electric mountain bike designed for riders who demand power, precision, and comfort on challenging terrains. Equipped with a high-performance Bosch motor, it delivers a torque of 92 Nm, making steep climbs effortless. The carbon frame ensures durability while keeping the bike lightweight. Featuring a CUBE Dropper seatpost, it allows quick saddle height adjustments for different riding conditions. The Sram NX Eagle™ chain ensures smooth gear transitions, and the 63 cm frame size is optimized for stability and control. Whether you're an adventure enthusiast or a daily commuter, the Cube Stereo Hybrid 140 offers a premium riding experience.\",\n  \"quantity\": 10,\n  \"inStock\": true,\n  \"color\": \"Black\",\n  \"material\": \"Carbon\",\n  \"seatpost\": \"CUBE Dropper\",\n  \"weight\": \"19.8 kg\",\n  \"torque\": \"92 Nm\",\n  \"frameSize\": \"63 cm\",\n  \"chain\": \"Sram NX Eagle™\"\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/products",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-bicycle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTI4NDQ3MywiZXhwIjoxNzQwMTQ4NDczfQ.VDkUt7fNGIFlGAL0TA02_NSEu6lvx6ovwmyr3W9O9-E",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n    \"name\": \"Check1\",\n    \"brand\": \"Check1\",\n    \"price\": 222,\n    \"type\": \"jgjhg\",\n    \"description\": \"Check1\",\n    \"quantity\": 22\n  }",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Reyad/OneDrive/Pictures/Screenshots/Screenshot 2025-02-09 191253.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/products/67ab7f5c88c9b579326a55f8",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products",
+								"67ab7f5c88c9b579326a55f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-bicycles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczODQ1OTM5OSwiZXhwIjoxNzM5MzIzMzk5fQ.J3a4rgV2PJZe10c0-ZLCLd7e43E92dflE14PatuROdA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/products?page=2&searchTerm=du",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "searchTerm",
+									"value": "du"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-bicycle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MzgyMDIwOTAsImV4cCI6MTczOTkzMDA5MH0.oQVThPf9DbXn5eF7Je840z9Rv1fkTNXM_rQL-wpynHo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/products/6798aafd4caa467b84a4b44c",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products",
+								"6798aafd4caa467b84a4b44c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-bicycle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{bicycle-store}}/products/679a441bba0d81607d1e1641",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products",
+								"679a441bba0d81607d1e1641"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-brands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bicycle-store}}/products/getBrands",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"products",
+								"getBrands"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "create-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Reyad/OneDrive/Pictures/Screenshots/Screenshot 2024-12-26 164147.png"
+								},
+								{
+									"key": "data",
+									"value": "{\n  \"name\": \"no\",\n  \"email\": \"no@example.com\",\n  \"password\": \"123456\",\n  \"userType\": \"Customer\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/users",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTQxNDA3MSwiZXhwIjoxNzQwMjc4MDcxfQ.eTeq24r5TLSySa_xlFOvyw_JBdxVw6un52aRrcIUtJk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/users",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTk4NDQ5OSwiZXhwIjoxNzQwODQ4NDk5fQ.tqfxHBPC1BjkPXZWDAxU3zQ6pmuNDb0nZDaND6Nqcec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/users/janesmith@example.com",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"users",
+								"janesmith@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTQxNDA3MSwiZXhwIjoxNzQwMjc4MDcxfQ.eTeq24r5TLSySa_xlFOvyw_JBdxVw6un52aRrcIUtJk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountStatus\": \"Inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/users/shaihope@example.com",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"users",
+								"shaihope@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my-profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTk4NDQ5OSwiZXhwIjoxNzQwODQ4NDk5fQ.tqfxHBPC1BjkPXZWDAxU3zQ6pmuNDb0nZDaND6Nqcec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/users/myProfile",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"users",
+								"myProfile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/auth",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-pass",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxvQGdtYWlsLmNvbSIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTc0MDAyMjQ0OSwiZXhwIjoxNzQwODg2NDQ5fQ.oBfTYVrpjSWL1hKdu3C7ric_I8MKuKJHGbpftcAzRw8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPass\": \"123\",\r\n    \"newPass\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/auth/change-pass",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"auth",
+								"change-pass"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "make-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3Mzg2MTM3NzQsImV4cCI6MTczOTQ3Nzc3NH0.WmUS5Q55Uxd424K3guXdn19-sRrnC_ZDxFrxWPJfd-4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": \"6798f30368d3d574e9214f69\", \r\n  \"status\": \"Pending\",\r\n  \"paymentStatus\": \"Unpaid\",\r\n  \"items\": [\r\n    {\r\n      \"bicycle\": \"6798aafd4caa467b84a4b44c\", \r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/orders",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc0MDE1Njc1NywiZXhwIjoxNzQxMDIwNzU3fQ.sJ7lLnEefGQwy2o144LpXPGS4HfFlgJgGh935kDQCUM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczODU5MDY5NiwiZXhwIjoxNzM5NDU0Njk2fQ.JLWn--Sfz49rutoLn3OlOgpzrsYhWW8z1_dBLwxa9Hw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/679a2e8c2463ad72cb4c02d2",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"679a2e8c2463ad72cb4c02d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentStatus\": \"Paid\",\r\n    \"status\": \"Delivered\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/orders/679a2e8c2463ad72cb4c02d2",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"679a2e8c2463ad72cb4c02d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/679a2e8c2463ad72cb4c02d2",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"679a2e8c2463ad72cb4c02d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-successful",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3Mzg2MTM3NzQsImV4cCI6MTczOTQ3Nzc3NH0.WmUS5Q55Uxd424K3guXdn19-sRrnC_ZDxFrxWPJfd-4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/67a1242d56f7e338a8f74f3d",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"67a1242d56f7e338a8f74f3d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-my-orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3Mzk3ODAwMDgsImV4cCI6MTc0MDY0NDAwOH0.DLfkevM__q1BhABAboNx-pgPzARwEsVf2J9Ej3J7T-Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/orders/myOrder",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"myOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "top-products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTg1MDg5NCwiZXhwIjoxNzQwNzE0ODk0fQ.PXa8Qdh7zjgCMlMIFtIWwUFnJDPJsxmW1zssLkQgrZU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bicycle-store}}/orders/topProducts",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"topProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total-delivered-products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTg1MDg5NCwiZXhwIjoxNzQwNzE0ODk0fQ.PXa8Qdh7zjgCMlMIFtIWwUFnJDPJsxmW1zssLkQgrZU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/totalDeliveredProducts",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"totalDeliveredProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total-pending-products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTg1MDg5NCwiZXhwIjoxNzQwNzE0ODk0fQ.PXa8Qdh7zjgCMlMIFtIWwUFnJDPJsxmW1zssLkQgrZU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/totalPendingProducts",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"totalPendingProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-total-income",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTg1MDg5NCwiZXhwIjoxNzQwNzE0ODk0fQ.PXa8Qdh7zjgCMlMIFtIWwUFnJDPJsxmW1zssLkQgrZU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/getTotalIncome",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"getTotalIncome"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "last-seven-days",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVzbWl0aEBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTczOTg1MDg5NCwiZXhwIjoxNzQwNzE0ODk0fQ.PXa8Qdh7zjgCMlMIFtIWwUFnJDPJsxmW1zssLkQgrZU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{bicycle-store}}/orders/last7DaysIncome",
+							"host": [
+								"{{bicycle-store}}"
+							],
+							"path": [
+								"orders",
+								"last7DaysIncome"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bicycle-store",
+			"value": "http://localhost:3000/api",
+			"type": "string"
+		}
+	]
+}
